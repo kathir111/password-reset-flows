@@ -27,13 +27,16 @@ export default function ForgotPassword() {
       setMsg({ type: "success", text: "Reset link sent to your email" });
       setEmail("");
     } catch (err) {
-      console.error("Error:", err);
+  console.error("FORGOT PASSWORD ERROR:", err);
 
-      setMsg({
-        type: "danger",
-        text: err.response?.data?.message || "Something went wrong"
-      });
-    } finally {
+  setMsg({
+    type: "danger",
+    text:
+      err.response?.data?.message ||
+      err.message ||
+      "Something went wrong"
+  });
+} finally {
       setLoading(false);
     }
   };
