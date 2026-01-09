@@ -6,17 +6,27 @@ const connectDB = require("./config/db");
 const app = express();
 connectDB();
 
+/* ✅ CORS FIX */
 app.use(cors({
-    origin: process.env.CLIENT_URL,      // your frontend Netlify URL
+  origin: [
+    "http://localhost:3000",
+    "https://passflows.netlify.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
 app.use(express.json());
 
+/* ✅ Health check (VERY IMPORTANT) */
+app.get("/", (req, res) => {
+  res.send("Password Reset API is running");
+});
+
+/* ✅ Auth routes */
 app.use("/auth", require("./routes/authRoutes"));
-// app.use("/auth", authRoutes);
-    // await api.post("/auth/forgot-password", { email });
 
-
-app.listen(process.env.PORT, () =>
-  console.log(`Server running on port ${process.env.PORT}`)
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
 );
