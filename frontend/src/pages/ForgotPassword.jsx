@@ -16,10 +16,19 @@ export default function ForgotPassword() {
 
     try {
       setLoading(true);
-      await api.post("/auth/forgot-password", { email });
+      setMsg({ type: "", text: "" });
+
+      console.log("Sending email:", email);
+
+      const res = await api.post("/auth/forgot-password", { email });
+
+      console.log("Response:", res.data);
+
       setMsg({ type: "success", text: "Reset link sent to your email" });
       setEmail("");
     } catch (err) {
+      console.error("Error:", err);
+
       setMsg({
         type: "danger",
         text: err.response?.data?.message || "Something went wrong"
@@ -32,12 +41,7 @@ export default function ForgotPassword() {
   return (
     <div className="d-flex align-items-center justify-content-center vh-100">
       <Card className="auth-card p-4" style={{ width: "380px" }}>
-        {/* <h1 style={{ color: 'red', textAlign: 'center' }}>
-    Forgot Password Loaded
-  </h1> */}
-        <h4 className="text-center auth-title mb-3">
-          Forgot Password 🔐
-        </h4>
+        <h4 className="text-center mb-3">Forgot Password 🔐</h4>
 
         <p className="text-muted text-center mb-4">
           Enter your registered email
@@ -46,11 +50,10 @@ export default function ForgotPassword() {
         {msg.text && <Alert variant={msg.type}>{msg.text}</Alert>}
 
         <Form onSubmit={submit}>
-          <Form.Group className="mb-3 icon-input">
-            {/* <i className="bi bi-envelope-fill"></i> */}
+          <Form.Group className="mb-3">
             <Form.Control
               type="email"
-              placeholder=" Email address"
+              placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -60,17 +63,7 @@ export default function ForgotPassword() {
             {loading ? <Spinner size="sm" /> : "Send Reset Link"}
           </Button>
         </Form>
-        <div className="alert alert-info mt-4">
-        <strong>Instructions:</strong>
-        <ol className="mt-2 mb-0">
-          <li>Enter your registered email</li>
-          <li>Check your inbox for reset link</li>
-          <li>Link expires in 15 minutes</li>
-          <li>Enter your new Password</li>
-        </ol>
-      </div>
       </Card>
-      
     </div>
   );
 }
