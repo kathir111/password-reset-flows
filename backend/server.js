@@ -8,11 +8,7 @@ connectDB();
 
 /* ✅ CORS FIX */
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://jade-nougat-2439c9.netlify.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: "https://jade-nougat-2439c9.netlify.app",
   credentials: true
 }));
 
