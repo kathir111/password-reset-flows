@@ -10,7 +10,7 @@ connectDB();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://passworflows.netlify.app"
+    "https://jade-nougat-2439c9.netlify.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
