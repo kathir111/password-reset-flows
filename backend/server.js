@@ -19,10 +19,13 @@ app.use(cors({
 app.get("/test-env", (req, res) => {
   res.json({
     mongo: !!process.env.MONGO_URI,
-    email: !!process.env.EMAIL_USER,
-    client: process.env.CLIENT_URL
+    emailUser: !!process.env.EMAIL_USER,
+    emailPass: !!process.env.EMAIL_PASS,
+    clientUrl: process.env.CLIENT_URL,
+    port: process.env.PORT
   });
 });
+
 
 
 app.use(express.json());
