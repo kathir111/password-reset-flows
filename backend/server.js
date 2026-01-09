@@ -14,9 +14,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/auth", require("./routes/authRoutes"));
 // app.use("/auth", authRoutes);
-    await api.post("/auth/forgot-password", { email });
+    // await api.post("/auth/forgot-password", { email });
 
 
 app.listen(process.env.PORT, () =>
