@@ -16,6 +16,15 @@ app.use(cors({
   credentials: true
 }));
 
+app.get("/test-env", (req, res) => {
+  res.json({
+    mongo: !!process.env.MONGO_URI,
+    email: !!process.env.EMAIL_USER,
+    client: process.env.CLIENT_URL
+  });
+});
+
+
 app.use(express.json());
 
 /* ✅ Health check (VERY IMPORTANT) */
