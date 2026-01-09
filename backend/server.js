@@ -10,7 +10,7 @@ connectDB();
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://passflows.netlify.app"
+    "https://passworflows.netlify.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
